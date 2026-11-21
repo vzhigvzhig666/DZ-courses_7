@@ -22,7 +22,9 @@ dependencies {
 }
 
 tasks.test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        excludeTags("ios")
+    }
     outputs.upToDateWhen { false }
 }
 
@@ -30,4 +32,15 @@ tasks.register("androidTest") {
     description = "Runs the Wikipedia Android app tests through Appium."
     group = "verification"
     dependsOn(tasks.test)
+}
+
+tasks.register<Test>("iosTest") {
+    description = "Runs the Wikipedia iOS app tests through Appium."
+    group = "verification"
+    testClassesDirs = sourceSets.test.get().output.classesDirs
+    classpath = sourceSets.test.get().runtimeClasspath
+    useJUnitPlatform {
+        includeTags("ios")
+    }
+    outputs.upToDateWhen { false }
 }
