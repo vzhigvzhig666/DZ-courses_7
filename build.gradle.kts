@@ -23,22 +23,11 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    outputs.upToDateWhen { false }
 }
 
-tasks.register<Test>("androidTest") {
-    description = "Runs black-box tests in Android Chrome through Appium."
+tasks.register("androidTest") {
+    description = "Runs the Wikipedia Android app tests through Appium."
     group = "verification"
-    testClassesDirs = sourceSets.test.get().output.classesDirs
-    classpath = sourceSets.test.get().runtimeClasspath
-    useJUnitPlatform()
-    systemProperty("platform", "ANDROID")
-}
-
-tasks.register<Test>("iosTest") {
-    description = "Runs black-box tests in iOS Safari through Appium."
-    group = "verification"
-    testClassesDirs = sourceSets.test.get().output.classesDirs
-    classpath = sourceSets.test.get().runtimeClasspath
-    useJUnitPlatform()
-    systemProperty("platform", "IOS")
+    dependsOn(tasks.test)
 }

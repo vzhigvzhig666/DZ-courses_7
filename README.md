@@ -1,14 +1,19 @@
-# Тестирование интерфейса Wikipedia
+# UI-тесты приложения Wikipedia
 
-Автоматические проверки главной страницы и перехода в раздел About Wikipedia.
+Black-box тесты двух экранов: списка языков Wikipedia и добавления языка
 
-Для запуска нужны JDK 21, Appium и Android-эмулятор или iOS-симулятор.
+## Запуск
 
-Запустить Appium, затем выполнить нужную команду:
+Понадобятся JDK 21, Appium 3 с UiAutomator2 и Android-эмулятор на английском
 
-```shell
+1. Установить [Wikipedia из Google Play](https://play.google.com/store/apps/details?id=org.wikipedia) или [официальный APK Wikimedia](https://releases.wikimedia.org/mobile/android/wikipedia/stable/)
+2. В списке языков приложения должен быть только English
+3. Запустить Appium с настроенным `ANDROID_HOME` и выполнить:
+
+```sh
 ./gradlew androidTest
-./gradlew iosTest
 ```
 
-Отчёт находится в `reports/test-report.md`.
+По умолчанию используется `emulator-5554`. Для другого эмулятора указать его ID в `ANDROID_SERIAL`
+
+[Отчёт и сценарии](reports/test-report.md)
